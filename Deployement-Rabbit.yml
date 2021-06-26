@@ -1,0 +1,41 @@
+#rbq
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vprormq
+  labels:
+    app: vprormq
+    version: "2.0"
+spec:
+  selector:
+    matchLabels:
+      app: vprormq
+      version: "2.0"
+  replicas: 1
+  template:
+    metadata:
+      name: vprormq
+      labels:
+        app: vprormq
+        version: "2.0"
+    spec:
+      containers:
+        - name: vprormq
+          image: rabbitmq
+          ports:
+            - containerPort: 15672
+              name : vprormqport
+          volumeMounts:
+            - mountPath: /var/lib/rabbitmq/mnesia
+              name: vprormqinto
+          env:
+            - name: RABBITMQ_DEFAULT_USER
+              value: "guest"
+            - name: RABBITMQ_DEFAULT_PASS
+              value: "guest"
+      volumes:
+        - name: vprormqinto
+          persistentVolumeClaim:
+            claimName: vprormqvc
