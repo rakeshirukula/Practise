@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vprodb
+spec:
+  selector:
+    tier : database
+    app: vprodb
+    version : "1.0"
+  ports:
+    - port: 3306
+      targetPort: vprodbport
+  type: ClusterIP

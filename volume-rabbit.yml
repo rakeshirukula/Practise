@@ -1,0 +1,30 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: standardforrmq
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  zone : us-west-2b
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+mountOptions:
+  - debug
+volumeBindingMode: Immediate
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: vprormqvc
+  labels:
+    app: vprormq
+    version: "2.0"
+spec:
+  storageClassName: standardforrmq
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

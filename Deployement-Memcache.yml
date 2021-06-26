@@ -1,0 +1,41 @@
+# mem
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vprocache
+  labels:
+    app: vprocache
+    version: "2.0"
+spec:
+  selector:
+    matchLabels:
+      app: vprocache
+      version: "2.0"
+  replicas: 1
+  template:
+    metadata:
+      name: vprocache
+      labels:
+        app: vprocache
+        version: "2.0"
+    spec:
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+      containers:
+        - name: vprocache
+          image: rakeshirukula/vpromemcached:1
+          ports:
+            - containerPort: 11211
+              name : vpromemport
+          volumeMounts:
+            - mountPath: /usr/local/memcachedata
+              name: vpromeminto
+      volumes:
+        - name: vpromeminto
+          persistentVolumeClaim:
+            claimName: vprocachevc
+
+
+# worked but still need better
