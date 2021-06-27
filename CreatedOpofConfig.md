@@ -2,7 +2,7 @@
 
 apiVersion: v1
 data:
-  mysql.sql: "-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)\n--\n-- Host:
+  data_backup.sql : "-- MySQL dump 10.13  Distrib 5.7.18, for Linux (x86_64)\n--\n-- Host:
     localhost    Database: accounts\n-- ------------------------------------------------------\n--
     Server version\t5.7.18-0ubuntu0.16.10.1\n\n/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT
     */;\n/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;\n/*!40101
@@ -72,3 +72,5 @@ metadata:
   namespace: default
   resourceVersion: "37763"
   uid: 4c259a10-9637-4058-81d9-af013a90543e
+
+
