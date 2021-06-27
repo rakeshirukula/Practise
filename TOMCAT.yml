@@ -1,0 +1,43 @@
+#tomcat
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vprotomcat
+spec:
+  selector:
+    matchLabels:
+      app: vprotomcat
+      version: "1.0"
+  replicas: 3
+  template:
+    metadata:
+      name: vprotomcat
+      labels:
+        app: vprotomcat
+        version: "1.0"
+    spec:
+      containers:
+        - name: vprotomcat
+          image: rakeshirukula/vprotomcat:1
+          ports:
+            - name : vprotomcatport
+              containerPort: 8080
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: vprotomcat
+spec:
+  selector:
+    app: vprotomcat
+    version : "1.0"
+  ports:
+    - port: 80
+      targetPort: vprotomcatport
+  type: LoadBalancer
+
+
