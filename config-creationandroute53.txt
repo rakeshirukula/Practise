@@ -1,0 +1,3 @@
+add lb to rute53
+
+kubectl create cm usermanagement --from-file=./data_backup.sql
